@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:pokedex/PokemonModel.dart';
+import 'package:pokedex/data/pokemon_model.dart';
 
 abstract class PokemonState{}
 class PokemonInitial extends PokemonState{}
