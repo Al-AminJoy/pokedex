@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:pokedex/data/pokemon_info.dart';
 import 'package:pokedex/data/pokemon_model.dart';
 import 'package:pokedex/data/pokemon_species.dart';
 class PokemonRepository{
@@ -19,12 +20,13 @@ class PokemonRepository{
     return Pokemon.fromJson(json);
   }
 
-  Future<dynamic> getPokemonInfo(int id) async{
+  Future<PokemonInfo> getPokemonInfo(int id) async{
     final uri=Uri.https(baseUrl, '/api/v2/pokemon/$id');
     try {
       final response = await client.get(uri);
       final json = jsonDecode(response.body);
       print(json);
+      return PokemonInfo.fromJson(json);
     }
     catch(e){
       print(e);

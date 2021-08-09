@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokedex/bloc/nav_cubit.dart';
 import 'package:pokedex/bloc/pokemon_bloc.dart';
 
 import 'bloc/pokemon_state.dart';
@@ -29,15 +30,18 @@ class _PokedexViewState extends State<PokedexView> {
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
                 itemCount: state.pokemonListing.length,
                 itemBuilder: (context, index) {
-                  return Card(
-                    child: GridTile(
-                      child: Column(
-                        children: [
-                          Image.network(state.pokemonListing[index].imageURL),
-                          Text(state.pokemonListing[index].name),
-                        ],
-                      ),
-                    )
+                  return GestureDetector(
+                    onTap:()=> BlocProvider.of<NavCubit>(context).showPokemonDetails(state.pokemonListing[index].id),
+                    child: Card(
+                      child: GridTile(
+                        child: Column(
+                          children: [
+                            Image.network(state.pokemonListing[index].imageURL),
+                            Text(state.pokemonListing[index].name),
+                          ],
+                        ),
+                      )
+                    ),
                   );
                 },);
           }
